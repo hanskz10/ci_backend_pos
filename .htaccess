@@ -1,0 +1,3 @@
+RewriteEngine on 
+RewriteCond $1 !^(index.php|css|js|images|img|fonts|robots.txt|assets) 
+RewriteRule ^(.*)$ /curso_codeigniter/ci_backend_pos/index.php/$1 [L]
