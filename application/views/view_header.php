@@ -123,104 +123,46 @@
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
-        <li class="header">MAIN NAVIGATION</li>
-        <li class="active treeview">
-          <a href="#">
-            <i class="fa fa-folder"></i> <span>Catálogos</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li class="active"><a href="pages/examples/invoice.html"><i class="fa fa-circle-o"></i> Productos</a></li>
-            <li><a href="pages/examples/profile.html"><i class="fa fa-circle-o"></i> Clientes</a></li>
-            <li><a href="pages/examples/login.html"><i class="fa fa-circle-o"></i> Proveedores</a></li>
-            <li><a href="pages/examples/register.html"><i class="fa fa-circle-o"></i> Categorías</a></li>
-            <li><a href="pages/examples/lockscreen.html"><i class="fa fa-circle-o"></i> Usuarios</a></li>            
-          </ul>
-        </li>       
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-edit"></i> <span>Ventas</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="pages/forms/general.html"><i class="fa fa-circle-o"></i> Nueva venta</a></li>            
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-table"></i> <span>Compras</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="pages/tables/simple.html"><i class="fa fa-circle-o"></i> Orden de compra</a></li>            
-          </ul>
-        </li>        
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-pie-chart"></i>
-            <span>Reportes</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="pages/charts/chartjs.html"><i class="fa fa-circle-o"></i> Reporte de movimientos</a></li>            
-          </ul>
-        </li>         
-      </ul>
-
-
-
-      <div id="treeMenu"><br />        
-        <ul>
-          <?php
-            $contador  = 0;
-            $LineaTemp = 0;
-            $IdMenu    = 0;
-            session_start();
-            $ArrayMenu = $_SESSION['Menu'];
-            foreach ($ArrayMenu as $key => $value) 
+        <li class="header">MAIN NAVIGATION</li>  
+        <?php
+          $contador  = 0;
+          $LineaTemp = 0;
+          $IdMenu    = 0;
+          session_start();
+          $ArrayMenu = $_SESSION['Menu'];
+            
+          foreach ($ArrayMenu as $key => $value) 
+          {
+            $linea    = $value->Linea;
+            $url      = $value->URL;
+            $IdMenu   = $value->IdMenu;
+            
+            if($linea == 1)
             {
-              $linea    = $value->Linea;
-              $url      = $value->URL;
-              $IdMenu   = $value->IdMenu;
-              if($linea==1)
-              {
-                $LineaTemp = $value->IdMenu;
-                echo '<li>';
-                echo '<a href="#" class="parent">'.$value->Descripcion.'</a><span></span>';
-                echo '<div>';
-                echo '<ul>';
-              }
-              
-              if($linea == $LineaTemp)
-              { 
-                echo '<li><span></span><a href="'.base_url().$url.'">'.$value->Descripcion.'</a></li>';
-              }
-
-              if($url == "usuarios" or $url == "ventas" or $url == "ordencompra" or $url == "reportes")
-              {
-                echo '</ul>';
-                echo '</div>';
-                echo '</li>'; 
-              }
+              $LineaTemp = $value->IdMenu;
+              echo '<li class="treeview">';
+              echo '<a href="#">';
+              echo '<i class="fa fa-th"></i> <span>'.$value->Descripcion.'</span>';
+              echo '<span class="pull-right-container">';
+              echo '<i class="fa fa-angle-left pull-right"></i>';
+              echo '</span>';
+              echo '</a>';
+              echo '<ul class="treeview-menu">';
             }
-          ?>
-        </ul><hr /><br />
-      </div>
-    
-      
+            
+            if($linea == $LineaTemp)
+            {             
+              echo '<li><a href="'.base_url().$url.'"><i class="fa fa-circle-o"></i> '.$value->Descripcion.'</a></li>';
+            }
 
-
-
-
-
+            if($url == "usuarios" OR $url == "ventas" OR $url == "ordencompra" OR $url == "reportes")
+            {
+              echo '</ul>';
+              echo '</li>';
+            }
+          } 
+        ?>
+      </ul>
     </section>
     <!-- /.sidebar -->
   </aside>

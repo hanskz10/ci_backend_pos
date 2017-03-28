@@ -9,8 +9,8 @@ class login_model extends CI_Model {
 
      public function CreaMenu($idUser){
      	$sql = "SELECT U.ID, U.NOMBRE, U.APELLIDOS, AU.Usuario, AU.Proteccion, AU.Estatus, M.Id as IdMenu, M.Linea, ";
-     	$sql = $sql." M.Descripcion, M.URL FROM usuarios as U INNER JOIN accesosusuarios as AU on U.ID=AU.Usuario ";
-		$sql = $sql." INNER JOIN menu as M on AU.Proteccion = M.Id WHERE AU.Usuario='".$idUser."' AND AU.Estatus = 1 ORDER BY M.Id ASC";
+     	$sql = $sql." M.Descripcion, M.URL FROM usuarios as U INNER JOIN accesosusuarios as AU on U.ID = AU.Usuario ";
+		$sql = $sql." INNER JOIN menu as M on AU.Proteccion = M.Id WHERE AU.Usuario = '".$idUser."' AND AU.Estatus = 1 ORDER BY M.Id ASC";
 		$query = $this->db->query($sql);
 		return $query->result();
      }
